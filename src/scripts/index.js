@@ -1,6 +1,11 @@
+import '../pages/index.css';
+import { initialCards } from './cards.js';
+
+
+
+
 const cardTemplate = document.querySelector('#card-template').content;
 const placesList = document.querySelector('.places__list');
-
 
 const createCard = (card, deleteCardCallback) => {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
