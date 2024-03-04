@@ -1,5 +1,5 @@
 import './pages/index.css';
-import { initialCards, createCard, deleteCard} from './components/cards.js';
+import {initialCards, createCard, deleteCard, toggleCardLike} from './components/cards.js';
 import {openPopup} from "./components/modal";
 import {handleCardFormSubmit, handleFormSubmit} from "./components/forms";
 
@@ -11,7 +11,7 @@ const placesList = document.querySelector('.places__list');
 
 
 initialCards.forEach((card) => {
-  placesList.append(createCard(card, deleteCard));
+  placesList.append(createCard(card, deleteCard, toggleCardLike));
 
 })
 

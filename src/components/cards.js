@@ -28,7 +28,7 @@ const initialCards = [
     }
 ];
 
-function createCard(card, deleteCardCallback){
+function createCard(card, deleteCardCallback, toggleLikeCallabck){
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__image').src = card.link;
   cardElement.querySelector('.card__image').alt = `На фотке ${card.name}`;
@@ -40,7 +40,7 @@ function createCard(card, deleteCardCallback){
     }
 
     if (evt.target.classList.contains('card__like-button')) {
-      toggleCardLike(evt);
+      toggleLikeCallabck(evt);
     }
     if (evt.target.classList.contains('card__image')) {
       openCardImagePopup(evt, card);
@@ -70,4 +70,4 @@ function openCardImagePopup(event, card) {
 }
 
 
-export {initialCards, createCard, deleteCard};
+export {initialCards, createCard, deleteCard, toggleCardLike};
