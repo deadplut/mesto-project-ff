@@ -1,7 +1,7 @@
 import './pages/index.css';
 import {initialCards, createCard, deleteCard, toggleCardLike} from './components/cards.js';
 import {closePopupByClick, closePopupByEscape, openPopup, setOpenedPopup} from "./components/modal";
-import {handleCardFormSubmit, handleFormSubmit} from "./components/forms";
+import {handleCardFormSubmit, handleProfileFormSubmit} from "./components/forms";
 
 
 
@@ -47,7 +47,7 @@ contentElement.addEventListener('click', evt =>{
 })
 
 
-formElementProfile.addEventListener('submit', handleFormSubmit);
+formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 formElementCard.addEventListener('submit', handleCardFormSubmit);
 
 
@@ -72,6 +72,7 @@ export {
   jobInput,
   placeNameInput,
   linkInput,
-  placesList
+  placesList,
+  openCardImagePopup
 }
 

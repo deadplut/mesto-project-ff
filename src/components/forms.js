@@ -1,5 +1,5 @@
 import {closePopupByClick} from "./modal";
-import {createCard, deleteCard} from "./cards";
+import {createCard, deleteCard, toggleCardLike} from "./cards";
 import {
   jobInput,
   linkInput,
@@ -7,14 +7,17 @@ import {
   placeNameInput,
   placesList,
   profileDescElement,
-  profileTitleElement
+  profileTitleElement,
+  openCardImagePopup,
 } from "../index";
 
-export function handleFormSubmit(evt) {
+export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitleElement.textContent = nameInput.value
   profileDescElement.textContent = jobInput.value
-  closePopupByClick(evt)
+  evt.target.reset()
+
+
 }
 
 
@@ -24,6 +27,12 @@ export function handleCardFormSubmit(evt) {
     name: placeNameInput.value,
     link: linkInput.value
   }
-  placesList.prepend(createCard(newCard, deleteCard));
+  placesList.prepend(createCard(
+    newCard,
+    deleteCard,
+    toggleCardLike,
+    openCardImagePopup
+  ));
   closePopupByClick(evt)
+  evt.target.reset()
 }
