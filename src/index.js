@@ -1,6 +1,6 @@
 import './pages/index.css';
 import {initialCards, createCard, deleteCard, toggleCardLike} from './components/cards.js';
-import {openPopup} from "./components/modal";
+import {closePopupByClick, closePopupByEscape, openPopup, setOpenedPopup} from "./components/modal";
 import {handleCardFormSubmit, handleFormSubmit} from "./components/forms";
 
 
@@ -11,7 +11,12 @@ const placesList = document.querySelector('.places__list');
 
 
 initialCards.forEach((card) => {
-  placesList.append(createCard(card, deleteCard, toggleCardLike));
+  placesList.append(createCard(
+    card,
+    deleteCard,
+    toggleCardLike,
+    openCardImagePopup
+  ));
 
 })
 
@@ -44,6 +49,19 @@ contentElement.addEventListener('click', evt =>{
 
 formElementProfile.addEventListener('submit', handleFormSubmit);
 formElementCard.addEventListener('submit', handleCardFormSubmit);
+
+
+function openCardImagePopup(evt, card) {
+  const element = document.querySelector('.popup_type_image');
+  setOpenedPopup(element);
+  element.querySelector('.popup__image').src = card.link;
+  element.querySelector('.popup__image').alt =`На фотке ${card.name}`;
+  element.querySelector('.popup__caption').textContent = card.name;
+  element.addEventListener('click', closePopupByClick)
+  document.addEventListener('keydown', closePopupByEscape)
+
+}
+
 
 
 export {

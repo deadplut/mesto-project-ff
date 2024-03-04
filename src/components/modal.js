@@ -1,5 +1,5 @@
 function openPopup(element){
-  element.classList.add('popup_is-opened')
+  setOpenedPopup(element)
   element.addEventListener('click', closePopupByClick)
   document.addEventListener('keydown', closePopupByEscape)
 }
@@ -22,4 +22,8 @@ function closePopupByEscape(evt) {
   }
 }
 
-export {openPopup, closePopupByClick, closePopupByEscape}
+function setOpenedPopup(element) {
+  element.classList.add('popup_is-opened');
+}
+
+export {openPopup, closePopupByClick, closePopupByEscape, setOpenedPopup}
