@@ -1,5 +1,7 @@
 import './pages/index.css';
-import {initialCards, createCard, deleteCard, toggleCardLike} from './components/cards.js';
+import {initialCards} from './components/cards.js';
+
+import { createCard, deleteCard, toggleCardLike} from './components/card.js';
 import {closePopupByClick, closePopupByEscape, openPopup, setOpenedPopup} from "./components/modal";
 import {handleCardFormSubmit, handleProfileFormSubmit} from "./components/forms";
 
