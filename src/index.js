@@ -53,12 +53,12 @@ formElementCard.addEventListener('submit', handleCardFormSubmit);
 
 function openCardImagePopup(evt, card) {
   const element = document.querySelector('.popup_type_image');
-  setOpenedPopup(element);
+  openPopup(element);
   element.querySelector('.popup__image').src = card.link;
   element.querySelector('.popup__image').alt =`На фотке ${card.name}`;
   element.querySelector('.popup__caption').textContent = card.name;
-  element.addEventListener('click', closePopupByClick)
-  document.addEventListener('keydown', closePopupByEscape)
+  element.addEventListener('click', closePopupByClick);
+  document.addEventListener('keydown', closePopupByEscape);
 
 }
 
