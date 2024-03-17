@@ -17,8 +17,6 @@ export function handleProfileFormSubmit(evt) {
   profileDescElement.textContent = jobInput.value
   closePopupByClick(evt)
   evt.target.reset()
-
-
 }
 
 

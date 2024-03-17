@@ -1,5 +1,5 @@
-
 import {cardTemplate} from "../index";
+
 
 function createCard(card, deleteCardCallback, toggleLikeCallabck, openPopupCallBack){
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);

@@ -17,7 +17,8 @@ function closePopup(element){
 function closePopupByClick(evt) {
   if (
     evt.target.classList.contains('popup') ||
-    evt.target.classList.contains('popup__close')
+    evt.target.classList.contains('popup__close') ||
+    evt.target.classList.contains('popup__button')
   ){
     closePopup(evt.currentTarget)
     // evt.currentTarget.classList.remove('popup_is-opened')
