@@ -1,4 +1,4 @@
-import {closePopup, closePopupByClick} from "./modal";
+import {closePopup, closePopupByClick, closePopupBySubmit} from "./modal";
 import {createCard, deleteCard, toggleCardLike} from "./card";
 import {
   jobInput,
@@ -16,8 +16,7 @@ export function handleProfileFormSubmit(evt) {
   profileTitleElement.textContent = nameInput.value
   profileDescElement.textContent = jobInput.value
 
-  closePopupByClick(evt)
-  closePopup(evt.currentTarget)
+  closePopupBySubmit(evt)
   evt.target.reset()
 }
 
@@ -34,6 +33,6 @@ export function handleCardFormSubmit(evt) {
     toggleCardLike,
     openCardImagePopup
   ));
-  closePopupByClick(evt)
+  closePopupBySubmit(evt)
   evt.target.reset()
 }

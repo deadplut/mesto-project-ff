@@ -20,6 +20,14 @@ function closePopupByClick(evt) {
   }
 }
 
+function closePopupBySubmit(evt) {
+  if (
+    evt.target.classList.contains('popup__form')
+  ){
+    const popupFormElement = document.querySelector('.popup_is-opened')
+    closePopup(popupFormElement)
+  }
+}
 
 function closePopupByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -33,4 +41,4 @@ function setOpenedPopup(element) {
   element.classList.add('popup_is-opened');
 }
 
-export {openPopup, closePopup, closePopupByClick, closePopupByEscape, setOpenedPopup}
+export {openPopup, closePopup, closePopupByClick, closePopupByEscape, closePopupBySubmit, setOpenedPopup}
