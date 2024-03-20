@@ -4,6 +4,7 @@ import {initialCards} from './components/cards.js';
 import { createCard, deleteCard, toggleCardLike } from './components/card.js';
 import { openPopup } from "./components/modal";
 import { handleCardFormSubmit, handleProfileFormSubmit } from "./components/forms";
+import {enableValidation} from "./components/validation";
 
 
 const cardTemplate = document.querySelector('#card-template').content;
@@ -31,6 +32,14 @@ const formElementCard = document.forms['new-place'];
 const placeNameInput = formElementCard.elements['place-name'];
 const linkInput = formElementCard.elements.link;
 
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
 
 contentElement.addEventListener('click', evt =>{
 
@@ -58,6 +67,8 @@ function openCardImagePopup(evt, card) {
   element.querySelector('.popup__image').alt =`На фотке ${card.name}`;
   element.querySelector('.popup__caption').textContent = card.name;
 }
+
+enableValidation(validationConfig)
 
 
 export {
