@@ -21,7 +21,6 @@ const isValid = (formElement, inputElement, validationConfig) => {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage)
   } else {
     inputElement.setCustomValidity('')
-
   }
 
 
@@ -75,8 +74,16 @@ const enableValidation = validationConfig => {
   })
 }
 
-const clearValidation = (elementForm, validationConfig) => {
+const clearValidation = (formElement, validationConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig['inputSelector']))
+  const buttonElement = formElement.querySelector(validationConfig['submitButtonSelector'])
 
+  inputList.forEach(inputElement => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement, validationConfig)
+      toggleButtonState(inputList, buttonElement, validationConfig)
+    })
+  })
 }
 
 

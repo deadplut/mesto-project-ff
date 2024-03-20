@@ -4,7 +4,7 @@ import {initialCards} from './components/cards.js';
 import { createCard, deleteCard, toggleCardLike } from './components/card.js';
 import { openPopup } from "./components/modal";
 import { handleCardFormSubmit, handleProfileFormSubmit } from "./components/forms";
-import {enableValidation} from "./components/validation";
+import {clearValidation, enableValidation} from "./components/validation";
 
 
 const cardTemplate = document.querySelector('#card-template').content;
