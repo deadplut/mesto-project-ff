@@ -8,22 +8,18 @@ function closePopup(element){
   element.classList.remove('popup_is-opened')
   document.removeEventListener('keydown', closePopupByEscape);
   element.removeEventListener('click', closePopupByClick)
-
 }
-
-
 
 
 function closePopupByClick(evt) {
   if (
     evt.target.classList.contains('popup') ||
-    evt.target.classList.contains('popup__close') ||
-    evt.target.classList.contains('popup__button')
+    evt.target.classList.contains('popup__close')
   ){
     closePopup(evt.currentTarget)
-    // evt.currentTarget.classList.remove('popup_is-opened')
   }
 }
+
 
 function closePopupByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -32,8 +28,9 @@ function closePopupByEscape(evt) {
   }
 }
 
+
 function setOpenedPopup(element) {
   element.classList.add('popup_is-opened');
 }
 
-export {openPopup, closePopupByClick, closePopupByEscape, setOpenedPopup}
+export {openPopup, closePopup, closePopupByClick, closePopupByEscape, setOpenedPopup}
