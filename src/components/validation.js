@@ -43,6 +43,7 @@ const hasInvalidInput = inputList => {
   })
 }
 
+
 const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true
@@ -79,10 +80,10 @@ const clearValidation = (formElement, validationConfig) => {
   const buttonElement = formElement.querySelector(validationConfig['submitButtonSelector'])
 
   inputList.forEach(inputElement => {
-    inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement, validationConfig)
-      toggleButtonState(inputList, buttonElement, validationConfig)
-    })
+    inputElement.setCustomValidity('')
+    hideInputError(formElement, inputElement, validationConfig)
+    buttonElement.disabled = true
+    buttonElement.classList.add(validationConfig['inactiveButtonClass'])
   })
 }
 

@@ -47,11 +47,16 @@ contentElement.addEventListener('click', evt =>{
     const element = document.querySelector('.popup_type_edit');
     nameInput.value = profileTitleElement.textContent
     jobInput.value =  profileDescElement.textContent
+    clearValidation(formElementProfile, validationConfig)
     openPopup(element)
+
   }
   else if (evt.target.classList.contains('profile__add-button')) {
     const element = document.querySelector('.popup_type_new-card');
+    placeNameInput.value =''
+    linkInput.value = ''
     openPopup(element)
+    clearValidation(formElementCard, validationConfig)
   }
 })
 
@@ -80,6 +85,7 @@ export {
   placeNameInput,
   linkInput,
   placesList,
-  openCardImagePopup
+  openCardImagePopup,
+  validationConfig
 }
 
