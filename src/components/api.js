@@ -1,15 +1,19 @@
 import {initialCards} from "./cards";
 
-const cohort = 'cohort-magistr-2/'
-const url = 'https://nomoreparties.co/v1/' + cohort
-const token = '810f9d35-1a2c-4cd0-b653-75ff9d8a0b16'
 
-
+const config = {
+  baseUrl: 'https://nomoreparties.co/v1/cohort-magistr-2',
+  headers: {
+    authorization: '810f9d35-1a2c-4cd0-b653-75ff9d8a0b16',
+    'Content-Type': 'application/json'
+  }
+}
 
 
 ///////////////////
 //Profile
 ///////////////////
+
 const profileElement = document.querySelector('.profile.page__section')
 const profileObject = {
   imageElement: profileElement.querySelector('.profile__image'),
@@ -27,12 +31,10 @@ function setProfileData(data){
 }
 
 const getProfileDataApi = () => {
-    return fetch(url + 'users/me', {
-    headers: {
+    return fetch(`${config.baseUrl}/users/me`, {
       method: 'GET',
-      authorization: token
-    }
-  })
+      headers: config.headers
+    })
   .then(response => {
     if (response.ok) {
       return response.json()
@@ -45,12 +47,9 @@ const getProfileDataApi = () => {
 }
 
 const patchProfileDataApi = (name, about) => {
-  fetch(url + 'users/me', {
+  fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
-    headers: {
-      authorization: token,
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: name,
       about: about
@@ -68,13 +67,14 @@ const patchProfileDataApi = (name, about) => {
 }
 
 
+///////////////////
+//Cards
+///////////////////
 
 function getCardsDataApi() {
-  return fetch(url + 'cards', {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'GET',
-    headers: {
-      authorization: token
-    }
+    headers: config.headers
   })
     .then(response => {
       if (response.ok) {
@@ -91,16 +91,26 @@ function getCardsDataApi() {
 
 
 function postCardDataApi(name, link) {
-  return fetch(url + 'cards', {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
-    headers: {
-      authorization: token,
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: name,
       link: link
     })
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      return Promise.reject(`Что-то пошло не так: ${response.status}`);
+    })
+}
+
+function deleteCardDataApi(cardId) {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: config.headers
   })
     .then(response => {
       if (response.ok) {
@@ -122,5 +132,5 @@ let promises = [getProfileDataApi(),getCardsDataApi(),]
 
 
 
-export {promises, profileObject, patchProfileDataApi, postCardDataApi}
+export {promises, profileObject, patchProfileDataApi, postCardDataApi, deleteCardDataApi}
 
