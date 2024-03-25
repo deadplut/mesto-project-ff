@@ -26,7 +26,8 @@ export function handleCardFormSubmit(evt) {
     .then(response => {
       const newCard = {
         name: response['name'],
-        link: response['link']
+        link: response['link'],
+        likes: response['likes']
       }
       renderCard(newCard)
     })

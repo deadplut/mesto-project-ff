@@ -6,6 +6,9 @@ function createCard(card, deleteCardCallback, toggleLikeCallback, openPopupCallB
   cardElement.querySelector('.card__image').src = card.link;
   cardElement.querySelector('.card__image').alt = `На фотке ${card.name}`;
   cardElement.querySelector('.card__title').textContent = card.name;
+  cardElement.querySelector('.card__like__count').textContent = card.likes.length;
+
+
 
   cardElement.addEventListener('click', evt => {
     if (evt.target.classList.contains('card__delete-button')) {
