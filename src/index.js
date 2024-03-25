@@ -1,24 +1,25 @@
 import './pages/index.css';
-import {initialCards} from './components/cards.js';
 
-import { createCard, deleteCard, toggleCardLike } from './components/card.js';
+
 import { openPopup } from "./components/modal";
 import { handleCardFormSubmit, handleProfileFormSubmit } from "./components/forms";
 import {clearValidation, enableValidation} from "./components/validation";
+import {promises} from "./components/api";
+import {initialCards} from "./components/cards";
+import {renderCards} from "./components/card";
+
 
 
 const cardTemplate = document.querySelector('#card-template').content;
 const placesList = document.querySelector('.places__list');
 
 
-initialCards.forEach((card) => {
-  placesList.append(createCard(
-    card,
-    deleteCard,
-    toggleCardLike,
-    openCardImagePopup
-  ));
+await Promise.all(promises)
+  .then(() => {
+    renderCards(initialCards)
 })
+
+
 
 
 const contentElement = document.querySelector('.content');
@@ -53,8 +54,6 @@ contentElement.addEventListener('click', evt =>{
   }
   else if (evt.target.classList.contains('profile__add-button')) {
     const element = document.querySelector('.popup_type_new-card');
-    placeNameInput.value =''
-    linkInput.value = ''
     openPopup(element)
     clearValidation(formElementCard, validationConfig)
   }
@@ -74,6 +73,9 @@ function openCardImagePopup(evt, card) {
 }
 
 enableValidation(validationConfig)
+
+
+
 
 
 export {

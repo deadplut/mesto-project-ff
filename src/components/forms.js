@@ -1,20 +1,16 @@
 import {closePopupBySubmit} from "./modal";
-import {createCard, deleteCard, toggleCardLike} from "./card";
+import {renderCard, renderCards} from "./card";
 import {
   jobInput,
   linkInput,
   nameInput,
   placeNameInput,
-  placesList,
-  profileDescElement,
-  profileTitleElement,
-  openCardImagePopup,
 } from "../index";
+import {patchProfileDataApi, postCardDataApi} from "./api";
 
 export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileTitleElement.textContent = nameInput.value
-  profileDescElement.textContent = jobInput.value
+  patchProfileDataApi(nameInput.value, jobInput.value)
   closePopupBySubmit(evt)
   evt.target.reset()
 }
@@ -22,16 +18,18 @@ export function handleProfileFormSubmit(evt) {
 
 export function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const newCard = {
-    name: placeNameInput.value,
-    link: linkInput.value
-  }
-  placesList.prepend(createCard(
-    newCard,
-    deleteCard,
-    toggleCardLike,
-    openCardImagePopup
-  ));
+
+  const name = placeNameInput.value
+  const link = linkInput.value
+
+  postCardDataApi(name, link)
+    .then(response => {
+      const newCard = {
+        name: response['name'],
+        link: response['link']
+      }
+      renderCard(newCard)
+    })
   closePopupBySubmit(evt)
   evt.target.reset()
 }
