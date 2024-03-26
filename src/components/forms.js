@@ -1,18 +1,53 @@
 import {closePopupBySubmit} from "./modal";
-import {renderCard, renderCards} from "./card";
+import {renderCard} from "./card";
 import {
-  jobInput,
+  jobInput, linkAvatarInput,
   linkInput,
   nameInput,
   placeNameInput,
 } from "../index";
-import {patchProfileDataApi, postCardDataApi} from "./api";
+import {
+  logError,
+  patchProfileDataApi,
+  postCardDataApi,
+  profileObject,
+  putAvatarDataApi,
+  renderLoading,
+  setProfileData
+} from "./api";
 
 export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  renderLoading(true, evt)
   patchProfileDataApi(nameInput.value, jobInput.value)
-  closePopupBySubmit(evt)
-  evt.target.reset()
+    .then(response => {
+      profileObject.setProfileData(response)
+      closePopupBySubmit(evt)
+      evt.target.reset()
+    })
+    .catch(logError)
+    .finally( ()=> {
+        renderLoading(false, evt)
+      }
+    )
+}
+
+
+export function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
+  renderLoading(true, evt)
+  putAvatarDataApi(linkAvatarInput.value)
+    .then(response => {
+      setProfileData(response)
+      closePopupBySubmit(evt)
+      evt.target.reset()
+    })
+    .catch(logError)
+    .finally( ()=> {
+        renderLoading(false, evt)
+      }
+    )
+
 }
 
 
@@ -30,7 +65,13 @@ export function handleCardFormSubmit(evt) {
         likes: response['likes']
       }
       renderCard(newCard)
+      closePopupBySubmit(evt)
+      evt.target.reset()
     })
-  closePopupBySubmit(evt)
-  evt.target.reset()
+    .catch(logError)
+    .finally( ()=> {
+        renderLoading(false, evt)
+      }
+    )
+
 }

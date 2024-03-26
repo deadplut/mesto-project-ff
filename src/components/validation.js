@@ -1,8 +1,8 @@
-const showInputError = (formElement, inputElement, errorMesage, validationConfig) => {
+const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
 
   inputElement.classList.add(validationConfig['inputErrorClass'])
-  errorElement.textContent = errorMesage
+  errorElement.textContent = errorMessage
   errorElement.classList.add(validationConfig['errorClass'])
 }
 
