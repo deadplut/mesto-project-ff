@@ -1,3 +1,9 @@
+const disableSubmitButton = (button, config) => {
+  button.disabled = true
+  button.classList.add(config['inactiveButtonClass'])
+}
+
+
 const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
 
@@ -46,8 +52,7 @@ const hasInvalidInput = inputList => {
 
 const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true
-    buttonElement.classList.add(validationConfig['inactiveButtonClass'])
+    disableSubmitButton(buttonElement, validationConfig)
   } else {
     buttonElement.disabled = false
     buttonElement.classList.remove(validationConfig['inactiveButtonClass'])
@@ -82,10 +87,8 @@ const clearValidation = (formElement, validationConfig) => {
   inputList.forEach(inputElement => {
     inputElement.setCustomValidity('')
     hideInputError(formElement, inputElement, validationConfig)
-    buttonElement.disabled = true
-    buttonElement.classList.add(validationConfig['inactiveButtonClass'])
   })
+  disableSubmitButton(buttonElement, validationConfig)
 }
-
 
 export {enableValidation, clearValidation}

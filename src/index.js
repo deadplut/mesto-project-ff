@@ -4,7 +4,7 @@ import './pages/index.css'
 import { openPopup } from "./components/modal"
 import {handleAvatarFormSubmit, handleCardFormSubmit, handleProfileFormSubmit} from "./components/forms"
 import {clearValidation, enableValidation} from "./components/validation"
-import {logError, promises} from "./components/api"
+import {getCardsDataApi, getProfileDataApi, logError, profileObject, renderContentPromises} from "./components/api"
 import {initialCards} from "./components/cards"
 import {renderCards} from "./components/card"
 
@@ -14,13 +14,12 @@ const cardTemplate = document.querySelector('#card-template').content
 const placesList = document.querySelector('.places__list')
 
 
-await Promise.all(promises)
-  .then(() => {
+await Promise.all([getProfileDataApi(),getCardsDataApi(),])
+  .then((response) => {
+    profileObject.setProfileData(response[0])
     renderCards(initialCards)
 })
   .catch(logError)
-
-
 
 
 const contentElement = document.querySelector('.content')

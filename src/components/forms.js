@@ -12,7 +12,6 @@ import {
   postCardDataApi,
   profileObject,
   putAvatarDataApi,
-  renderLoading,
   setProfileData
 } from "./api";
 
@@ -59,12 +58,7 @@ export function handleCardFormSubmit(evt) {
 
   postCardDataApi(name, link)
     .then(response => {
-      const newCard = {
-        name: response['name'],
-        link: response['link'],
-        likes: response['likes']
-      }
-      renderCard(newCard)
+      renderCard(response)
       closePopupBySubmit(evt)
       evt.target.reset()
     })
@@ -74,4 +68,14 @@ export function handleCardFormSubmit(evt) {
       }
     )
 
+}
+
+function renderLoading(isLoading, event) {
+  const buttonElement = event.target.querySelector('.popup__button')
+  if (isLoading) {
+    buttonElement.textContent = 'Сохранение...'
+  }
+  else {
+    buttonElement.textContent = 'Сохранить'
+  }
 }

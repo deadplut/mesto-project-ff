@@ -47,9 +47,6 @@ const getProfileDataApi = () => {
       headers: CONFIG.headers
     })
   .then(handleResponse)
-    .then(response => {
-      profileObject.setProfileData(response)
-    })
 }
 
 const patchProfileDataApi = (name, about) => {
@@ -78,12 +75,7 @@ function putAvatarDataApi(link) {
       avatar: link,
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      }
-      return Promise.reject(response.status);
-    })
+    .then(handleResponse)
 }
 
 
@@ -147,23 +139,10 @@ function deleteLikeDataApi(cardId) {
     .then(handleResponse)
 }
 
-let promises = [getProfileDataApi(),getCardsDataApi(),]
-
-
-
-function renderLoading(isLoading, event) {
-  const buttonElement = event.target.querySelector('.popup__button')
-  if (isLoading) {
-    buttonElement.textContent = 'Сохранение...'
-  }
-  else {
-    buttonElement.textContent = 'Сохранить'
-  }
-}
 
 
 
 
 
-export {promises, profileObject, patchProfileDataApi, postCardDataApi, deleteCardDataApi, putLikeDataApi, deleteLikeDataApi, putAvatarDataApi, setProfileData, renderLoading, logError}
+export {getProfileDataApi,getCardsDataApi,profileObject, patchProfileDataApi, postCardDataApi, deleteCardDataApi, putLikeDataApi, deleteLikeDataApi, putAvatarDataApi, setProfileData, logError}
 
